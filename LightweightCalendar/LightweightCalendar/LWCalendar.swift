@@ -130,10 +130,16 @@ class LWCalendar: UIView
             calendar?.shiftByMonth(forward: true)
         }
         UIView.animate(withDuration: 0.15, delay: 0.15, options: [], animations:
-        {
-            self.calendar?.alpha = 1.0
-            self.monthLabel.alpha = 1.0
+            {
+                self.calendar?.alpha = 1.0
+                self.monthLabel.alpha = 1.0
         }, completion: nil)
+    }
+
+    func setCalendar(date: Date)
+    {
+        calendar?.selectedDate = date
+        calendar?.loadData()
     }
 
 }
@@ -141,6 +147,7 @@ class LWCalendar: UIView
 protocol LWCalendarDelegate: class
 {
     func viewFor(date: Date, with components: DateComponents) -> UIView?
+    func viewForSelectedDate() -> UIView?
     func didSelectDayAt(date: Date, with components: DateComponents)
 }
 
@@ -149,6 +156,7 @@ private class LWCalendarCollectionView: UIView, UICollectionViewDelegate, UIColl
     var dataSource: [Month] = []
     var selectedDate: Date = Date()
     var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    var selectedDayView: UIView?
 
     override init(frame: CGRect)
     {
@@ -159,7 +167,7 @@ private class LWCalendarCollectionView: UIView, UICollectionViewDelegate, UIColl
         collectionView.register(Day.self, forCellWithReuseIdentifier: "DayCell")
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
         {
-            layout.minimumLineSpacing = 0 
+            layout.minimumLineSpacing = 0
             layout.minimumInteritemSpacing = 0
         }
         loadData()
@@ -201,8 +209,11 @@ private class LWCalendarCollectionView: UIView, UICollectionViewDelegate, UIColl
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func loadData()
+    func loadData()
     {
+        collectionView.deselect
+        selectedDayView = (superview as? LWCalendar)?.delegate?.viewForSelectedDate()
+
         let selectedDateComponents = Utils.shared.getDateComponentsFrom(date: selectedDate)
         let currentMonthDate = Utils.shared.getDateFrom(day: selectedDateComponents.day!,
                                                         month: selectedDateComponents.month!,
@@ -296,6 +307,14 @@ private class LWCalendarCollectionView: UIView, UICollectionViewDelegate, UIColl
         if let date = dataSource[0].days[indexPath.row].date
         {
             (superview as? LWCalendar)?.delegate?.didSelectDayAt(date: date, with: Utils.shared.getDateComponentsFrom(date: date))
+            if let selectedView = selectedDayView
+            {
+                for item in collectionView.visibleCells
+                {
+                    (item as! Day).backgroundView = nil
+                }
+                (collectionView.cellForItem(at: indexPath) as! Day).backgroundView = selectedView
+            }
         }
     }
 
