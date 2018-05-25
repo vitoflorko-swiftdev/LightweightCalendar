@@ -139,7 +139,7 @@ class LWCalendar: UIView
     func setDate(_ date: Date)
     {
         calendar?.selectedDate = date
-        calendar?.loadData()
+        calendar?.loadData(size: CGSize(width: self.frame.size.width / 7, height: self.frame.size.height / 7))
     }
 
 }
@@ -170,7 +170,7 @@ private class LWCalendarCollectionView: UIView, UICollectionViewDelegate, UIColl
             layout.minimumLineSpacing = 0
             layout.minimumInteritemSpacing = 0
         }
-        loadData()
+        (size: CGSize(width: frame.size.width / 7, height: frame.size.height / 7))
         collectionView.backgroundColor = .white
 
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -209,10 +209,9 @@ private class LWCalendarCollectionView: UIView, UICollectionViewDelegate, UIColl
         fatalError("init(coder:) has not been implemented")
     }
 
-    func loadData()
+    func loadData(size: CGSize)
     {
-        selectedDayView = (superview as? LWCalendar)?.delegate?.viewForSelectedDate(of: CGSize(width: collectionView.frame.width / 7,
-                                                                                               height: collectionView.frame.height / 7))
+        selectedDayView = (superview as? LWCalendar)?.delegate?.viewForSelectedDate(of: size)
         let selectedDateComponents = Utils.shared.getDateComponentsFrom(date: selectedDate)
         let currentMonthDate = Utils.shared.getDateFrom(day: selectedDateComponents.day!,
                                                         month: selectedDateComponents.month!,
@@ -335,7 +334,7 @@ private class LWCalendarCollectionView: UIView, UICollectionViewDelegate, UIColl
             newMonth = 1
         }
         selectedDate = Utils.shared.getDateFrom(day: 10, month: newMonth, year: newYear)!
-        loadData()
+        loadData(size: CGSize(width: self.frame.size.width / 7, height: self.frame.size.height / 7))
     }
 
 }
