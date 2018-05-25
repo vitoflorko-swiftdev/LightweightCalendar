@@ -136,7 +136,7 @@ class LWCalendar: UIView
         }, completion: nil)
     }
 
-    func setCalendar(date: Date)
+    func setDate(_ date: Date)
     {
         calendar?.selectedDate = date
         calendar?.loadData()
@@ -146,8 +146,8 @@ class LWCalendar: UIView
 
 protocol LWCalendarDelegate: class
 {
-    func viewFor(date: Date, with components: DateComponents) -> UIView?
-    func viewForSelectedDate() -> UIView?
+    func viewFor(date: Date, with components: DateComponents, of size: CGSize) -> UIView?
+    func viewForSelectedDate(of size: CGSize) -> UIView?
     func didSelectDayAt(date: Date, with components: DateComponents)
 }
 
@@ -211,9 +211,8 @@ private class LWCalendarCollectionView: UIView, UICollectionViewDelegate, UIColl
 
     func loadData()
     {
-        collectionView.deselect
-        selectedDayView = (superview as? LWCalendar)?.delegate?.viewForSelectedDate()
-
+        selectedDayView = (superview as? LWCalendar)?.delegate?.viewForSelectedDate(of: CGSize(width: collectionView.frame.width / 7,
+                                                                                               height: collectionView.frame.height / 7))
         let selectedDateComponents = Utils.shared.getDateComponentsFrom(date: selectedDate)
         let currentMonthDate = Utils.shared.getDateFrom(day: selectedDateComponents.day!,
                                                         month: selectedDateComponents.month!,
@@ -227,7 +226,6 @@ private class LWCalendarCollectionView: UIView, UICollectionViewDelegate, UIColl
         {
             currentMonth.days.append((Day(number: i, isWeekday: true)))
         }
-
 
         //CELLS BEFORE THE FIRST DAY OF THE MONTH (LAST DAYS FROM THE PREVIOUS MONTH)
         let firstWeekday = Utils.shared.getWeekdayFrom(date: Utils.shared.getDateFrom(day: 1,
@@ -287,9 +285,12 @@ private class LWCalendarCollectionView: UIView, UICollectionViewDelegate, UIColl
     {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DayCell", for: indexPath) as? Day
         {
+            cell.backgroundView = nil
             cell.backgroundColor = .white
             if let date = dataSource[0].days[indexPath.row].date,
-                let viewForDay = (superview as? LWCalendar)?.delegate?.viewFor(date: date, with: Utils.shared.getDateComponentsFrom(date: date))
+                let viewForDay = (superview as? LWCalendar)?.delegate?.viewFor(date: date,
+                                                                               with: Utils.shared.getDateComponentsFrom(date: date),
+                                                                               of: cell.frame.size)
             {
                 cell.backgroundView = viewForDay
             }
