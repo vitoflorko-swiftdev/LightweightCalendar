@@ -170,7 +170,6 @@ private class LWCalendarCollectionView: UIView, UICollectionViewDelegate, UIColl
             layout.minimumLineSpacing = 0
             layout.minimumInteritemSpacing = 0
         }
-        (size: CGSize(width: frame.size.width / 7, height: frame.size.height / 7))
         collectionView.backgroundColor = .white
 
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -292,6 +291,7 @@ private class LWCalendarCollectionView: UIView, UICollectionViewDelegate, UIColl
                                                                                of: cell.frame.size)
             {
                 cell.backgroundView = viewForDay
+                cell.date = date
             }
             cell.foregroundColor = dataSource[0].days[indexPath.row].foregroundColor
             cell.number = dataSource[0].days[indexPath.row].number
@@ -309,11 +309,18 @@ private class LWCalendarCollectionView: UIView, UICollectionViewDelegate, UIColl
             (superview as? LWCalendar)?.delegate?.didSelectDayAt(date: date, with: Utils.shared.getDateComponentsFrom(date: date))
             if let selectedView = selectedDayView
             {
-                for item in collectionView.visibleCells
+                for i in 0..<collectionView.visibleCells.count
                 {
-                    (item as! Day).backgroundView = nil
+                    if let dayCell = (collectionView.visibleCells[i] as? Day), dayCell.date != nil
+                    {
+                        dayCell.backgroundView = (superview as? LWCalendar)?.delegate?.viewFor(date: dayCell.date!, with: Utils.shared.getDateComponentsFrom(date: dayCell.date!), of: dayCell.frame.size)
+                    }
+                    else
+                    {
+                        collectionView.visibleCells[i].backgroundView = nil
+                    }
                 }
-                (collectionView.cellForItem(at: indexPath) as! Day).backgroundView = selectedView
+                (collectionView.cellForItem(at: indexPath) as! Day).backgroundView? = selectedView
             }
         }
     }
@@ -359,6 +366,12 @@ private class Day: UICollectionViewCell
     var number: Int?
     var dayName: UILabel = UILabel()
     var date: Date?
+
+    override func prepareForReuse()
+    {
+        date = nil
+        number = nil
+    }
 
     init(backgroundColor: UIColor = .clear, foregroundColor: UIColor = .black, number: Int?, isWeekday: Bool = false, date: Date? = nil)
     {
