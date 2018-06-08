@@ -1,0 +1,11 @@
+framework module LWCalendar {
+  umbrella header "LWCalendar.h"
+
+  export *
+  module * { export * }
+}
+
+module LWCalendar.Swift {
+    header "LWCalendar-Swift.h"
+    requires objc
+}
