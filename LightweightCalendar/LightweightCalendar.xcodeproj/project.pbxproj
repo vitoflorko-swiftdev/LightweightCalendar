@@ -14,6 +14,7 @@
 		BF729EBB20B2EB9A00D0C2E5 /* LWCalendar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF729EB420B2EB9A00D0C2E5 /* LWCalendar.framework */; };
 		BF729EBC20B2EB9A00D0C2E5 /* LWCalendar.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BF729EB420B2EB9A00D0C2E5 /* LWCalendar.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BF729EC120B2EBB800D0C2E5 /* LWCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF729EAD20ADAAB900D0C2E5 /* LWCalendar.swift */; };
+		BFD5D25820CA7701000BA87E /* LWCalendar.swift in Resources */ = {isa = PBXBuildFile; fileRef = BF729EAD20ADAAB900D0C2E5 /* LWCalendar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -209,6 +210,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFD5D25820CA7701000BA87E /* LWCalendar.swift in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

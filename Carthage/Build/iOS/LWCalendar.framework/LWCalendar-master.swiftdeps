@@ -1,0 +1,5 @@
+version: "Apple Swift version 4.1 (swiftlang-902.0.48 clang-902.0.37.1)"
+options: "d81b167fd0f0f73fd9ccef872e9d3d82"
+build_time: [1528446994, 994036000]
+inputs:
+  "/Users/vojtechflorko/Desktop/Projects/Pods/LightweightCalendar/LightweightCalendar/LightweightCalendar/LWCalendar.swift": [9223372036, 854775807]
