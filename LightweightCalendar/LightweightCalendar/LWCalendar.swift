@@ -23,11 +23,11 @@
 import Foundation
 import UIKit
 
-class LWCalendar: UIView
+open class LWCalendar: UIView
 {
     var monthLabel: UILabel = UILabel()
     fileprivate var calendar: LWCalendarCollectionView?
-    weak var delegate: LWCalendarDelegate?
+    public weak var delegate: LWCalendarDelegate?
 
     override init(frame: CGRect)
     {
@@ -35,7 +35,7 @@ class LWCalendar: UIView
         loadCalendar()
     }
 
-    required init?(coder aDecoder: NSCoder)
+    required public init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
         loadCalendar()
@@ -158,7 +158,7 @@ class LWCalendar: UIView
         }, completion: nil)
     }
 
-    func setDate(_ date: Date)
+    public func setDate(_ date: Date)
     {
         calendar?.selectedDate = date
         calendar?.loadData(size: CGSize(width: self.frame.size.width / 7, height: self.frame.size.height / 7))
@@ -166,7 +166,7 @@ class LWCalendar: UIView
 
 }
 
-protocol LWCalendarDelegate: class
+public protocol LWCalendarDelegate: class
 {
     func viewFor(date: Date, with components: DateComponents, of size: CGSize) -> UIView?
     func viewForSelectedDate(of size: CGSize) -> UIView?

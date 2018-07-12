@@ -14,6 +14,7 @@
 		BF729EBB20B2EB9A00D0C2E5 /* LWCalendar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF729EB420B2EB9A00D0C2E5 /* LWCalendar.framework */; };
 		BF729EBC20B2EB9A00D0C2E5 /* LWCalendar.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BF729EB420B2EB9A00D0C2E5 /* LWCalendar.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BF729EC120B2EBB800D0C2E5 /* LWCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF729EAD20ADAAB900D0C2E5 /* LWCalendar.swift */; };
+		BF97A8F720CA79C5007E250D /* LWCalendar.swift in Frameworks */ = {isa = PBXBuildFile; fileRef = BF729EAD20ADAAB900D0C2E5 /* LWCalendar.swift */; };
 		BFD5D25820CA7701000BA87E /* LWCalendar.swift in Resources */ = {isa = PBXBuildFile; fileRef = BF729EAD20ADAAB900D0C2E5 /* LWCalendar.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF97A8F720CA79C5007E250D /* LWCalendar.swift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +79,7 @@
 				BF729E9A20ADAA9A00D0C2E5 /* LightweightCalendar */,
 				BF729EB520B2EB9A00D0C2E5 /* LWCalendar */,
 				BF729E9920ADAA9A00D0C2E5 /* Products */,
+				BF97A8F620CA79C5007E250D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,6 +110,13 @@
 				BF729EB720B2EB9A00D0C2E5 /* Info.plist */,
 			);
 			path = LWCalendar;
+			sourceTree = "<group>";
+		};
+		BF97A8F620CA79C5007E250D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -401,10 +411,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = VKWXF2689L;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -417,6 +427,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.florcosoft.LWCalendar;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -429,10 +440,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = VKWXF2689L;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -445,6 +456,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.florcosoft.LWCalendar;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

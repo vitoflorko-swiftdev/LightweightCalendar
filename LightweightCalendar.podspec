@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'LightweightCalendar'
-  s.version          = '0.3.0'
+  s.version          = '0.4.0'
   s.summary          = 'Slim iOS Calendar control with high performance and easy customization'
  
   s.description      = <<-DESC
